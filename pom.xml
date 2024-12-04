@@ -10,7 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>Ex1</module>
-        <module>Utilties</module>
+        <module>Ex2</module>
+        <module>Utilities</module>
     </modules>
 
     <properties>
