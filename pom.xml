@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>Ex1</module>
-        <module>Ex2</module>
-        <module>Ex3</module>
-        <module>Ex4</module>
-        <module>Ex5</module>
+        <module>day1</module>
+        <module>day2</module>
+        <module>day3</module>
+        <module>day4</module>
+        <module>day5</module>
         <module>Utilities</module>
     </modules>
 
