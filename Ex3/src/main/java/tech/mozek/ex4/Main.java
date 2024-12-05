@@ -1,4 +1,4 @@
-package tech.mozek.ex3;
+package tech.mozek.ex4;
 
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
