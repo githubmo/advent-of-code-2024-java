@@ -1,4 +1,4 @@
-package tech.mozek.ex4;
+package tech.mozek.day4;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
