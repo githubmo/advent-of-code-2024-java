@@ -27,7 +27,10 @@ public class Main {
         var befores = new HashMap<Integer, ArrayList<Integer>>();
         var afters = new HashMap<Integer, ArrayList<Integer>>();
         var mapped = input.map(line -> {
+            // edge case for the empty lines
             if (line.isBlank()) return 0;
+
+            // building the ruleset
             if (line.contains("|")) {
                 var left = Integer.parseInt(line.split("\\|")[0].trim());
                 var right = Integer.parseInt(line.split("\\|")[1].trim());
@@ -35,6 +38,7 @@ public class Main {
                 addToMap(afters, right, left);
                 return 0;
             } else {
+                // solving the problem
                 var listOfInts = new ArrayList<>(Arrays.stream(line.trim().split(",")).map(Integer::parseInt).toList());
                 var middle = listOfInts.get(listOfInts.size() / 2);
                 while (!listOfInts.isEmpty()) {
@@ -53,7 +57,10 @@ public class Main {
         var befores = new HashMap<Integer, ArrayList<Integer>>();
         var afters = new HashMap<Integer, ArrayList<Integer>>();
         var mapped = input.map(line -> {
+            // edge case for empty line that split the two halfs and extra empty line at end
             if (line.isBlank()) return 0;
+
+            // building up the ruleset
             if (line.contains("|")) {
                 var left = Integer.parseInt(line.split("\\|")[0].trim());
                 var right = Integer.parseInt(line.split("\\|")[1].trim());
@@ -61,6 +68,7 @@ public class Main {
                 addToMap(afters, right, left);
                 return 0;
             } else {
+                // solving the actual problem
                 var listOfInts = new ArrayList<>(Arrays.stream(line.trim().split(",")).map(Integer::parseInt).toList());
                 while (!listOfInts.isEmpty()) {
                     var first = listOfInts.removeFirst();
