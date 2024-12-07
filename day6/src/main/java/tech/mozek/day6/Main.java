@@ -70,10 +70,10 @@ public class Main {
 
             }
             gaurdLocation = nextLocation;
-            if (map.length < 20) {
-                printMap(map);
-                System.out.println();
-            }
+//            if (map.length < 20) {
+//                printMap(map);
+//                System.out.println();
+//            }
         }
         logger.info("Turned {} times", turned);
         return Arrays
@@ -85,46 +85,8 @@ public class Main {
     }
 
     public static long part2(Stream<String> input) throws IOException {
-        var obstructionCount = 0L;
-
-        // first find the guardLocation
-        var map = input.map(String::toCharArray).toArray(char[][]::new);
-        var guardLocation = new Point(0, 0);
-        var guardDirection = '^';
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j] == guardDirection) {
-                    guardLocation = new Point(j, i);
-                    break;
-                }
-            }
-        }
-        var turned = 0;
-        logger.info("Start index is {}", guardLocation);
-        while (guardLocation.x >= 0 && guardLocation.y >= 0 && guardLocation.x < map[0].length && guardLocation.y < map.length) {
-            map[guardLocation.y][guardLocation.x] = 'X';
-            var step = DIRECTIONS.get(guardDirection);
-            var nextLocation = step.move(guardLocation);
-            if (nextLocation.x >= 0 && nextLocation.y >= 0 && nextLocation.x < map[0].length && nextLocation.y < map.length &&
-                    map[nextLocation.y][nextLocation.x] == '#') {
-                guardDirection = NEXT_DIRECTION.get(guardDirection);
-                step = DIRECTIONS.get(guardDirection);
-                nextLocation = step.move(guardLocation);
-                turned++;
-
-            } else {
-                if (nextLocation.x >= 0 && nextLocation.y >= 0 && nextLocation.x < map[0].length && nextLocation.y < map.length) {
-                    // check if it makes a loop
-                    var clone = deepClone(map);
-                    clone[nextLocation.y][nextLocation.x] = '#';
-                    obstructionCount += checkLoop(clone, NEXT_DIRECTION.get(guardDirection), guardLocation);
-                }
-
-            }
-            guardLocation = nextLocation;
-        }
-
-        return obstructionCount;
+        // brute forced but need to find a better solution
+        return 0;
     }
 
     private record Point(Integer x, Integer y) {
@@ -142,27 +104,4 @@ public class Main {
     private static char[][] deepClone(char[][] map) {
         return Arrays.stream(map).map(char[]::clone).toArray(x -> map.clone());
     }
-
-//    private static int checkLoop(char[][] map, char guardDirection, Point guardLocation) {
-//        var originalGuardDirection = guardDirection;
-//        var originalGuardLocation = new Point(guardLocation.x, guardLocation.y);
-//        while (guardLocation.x >= 0 && guardLocation.y >= 0 && guardLocation.x < map[0].length && guardLocation.y < map.length) {
-//            map[guardLocation.y][guardLocation.x] = 'X';
-//            var step = DIRECTIONS.get(guardDirection);
-//            var nextLocation = step.move(guardLocation);
-//            printMap(map);
-//            System.out.println("===============");
-//            if (Objects.equals(nextLocation.x, originalGuardLocation.x) && Objects.equals(nextLocation.y, originalGuardLocation.y) && guardDirection == originalGuardDirection) {
-//                return 1;
-//            }
-//            if (nextLocation.x >= 0 && nextLocation.y >= 0 && nextLocation.x < map[0].length && nextLocation.y < map.length &&
-//                    map[nextLocation.y][nextLocation.x] == '#') {
-//                guardDirection = NEXT_DIRECTION.get(guardDirection);
-//                step = DIRECTIONS.get(guardDirection);
-//                nextLocation = step.move(guardLocation);
-//            }
-//            guardLocation = nextLocation;
-//        }
-//        return 0;
-//    }
 }
