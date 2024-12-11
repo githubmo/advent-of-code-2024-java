@@ -16,6 +16,7 @@ public class Main {
         try {
             logger.info("Part 1 solution to sample is {}", part1(ReadInput.readSampleInput()));
             logger.info("Part 1 solution to input is {}", part1(ReadInput.readInput()));
+            cache.clear();
             logger.info("Part 2 solution to sample is {}", part2(ReadInput.readSampleInput()));
             logger.info("Part 2 solution to input is {}", part2(ReadInput.readInput()));
         } catch (IOException e) {
@@ -33,7 +34,6 @@ public class Main {
     }
 
     public static long part2(Stream<String> input) throws IOException {
-        cache.clear();
         return Arrays.stream(input.findFirst().orElseThrow().split("\\s+"))
                 .map(s -> solution(Stream.of(s), 75)).reduce(Long::sum).orElseThrow();
     }
@@ -43,7 +43,7 @@ public class Main {
         return stoneLine.stream().map(s -> solution2(List.of(s), steps, 0)).reduce(Long::sum).orElseThrow();
     }
 
-    private static record NumStepSize(String num, int step) {
+    private record NumStepSize(String num, int step) {
     }
 
     private static final Map<NumStepSize, Long> cache = new HashMap<>();
@@ -73,7 +73,6 @@ public class Main {
                 return sss;
             }).reduce(Long::sum).orElseThrow();
 
-//        logger.info(stoneLine.stream().reduce((a, b) -> a + " " + b).orElseThrow());
             results.add(size);
         });
         return results.stream().reduce(Long::sum).orElseThrow();
